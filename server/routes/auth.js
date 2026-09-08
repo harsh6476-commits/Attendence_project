@@ -127,7 +127,7 @@ router.post('/signin', async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password'
+        message: 'No account found with this email. Please sign up first.'
       });
     }
 
