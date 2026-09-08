@@ -12,7 +12,6 @@ const passwordInput   = document.getElementById('password');
 const confirmInput    = document.getElementById('confirmPassword');
 const submitBtn       = document.getElementById('submitBtn');
 const submitText      = document.getElementById('submitText');
-const googleBtn       = document.getElementById('googleBtn');
 const strengthBar     = document.getElementById('strengthBar');
 const strengthText    = document.getElementById('strengthText');
 const usernameDisplay = document.getElementById('usernameDisplay');
@@ -262,11 +261,6 @@ form.addEventListener('submit', async (e) => {
     submitBtn.disabled = false;
     submitText.textContent = 'Create Account';
   }
-});
-
-// ── Google Sign Up ────────────────────────────────────────────────────────
-googleBtn.addEventListener('click', () => {
-  window.location.href = `/api/auth/google?role=${selectedRole}`;
 });
 
 // ── Auto-redirect if already logged in ────────────────────────────────────

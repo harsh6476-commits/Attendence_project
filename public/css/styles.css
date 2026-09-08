@@ -1,244 +1,204 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   IIIT Dharwad Attendance Portal — Custom Styles
+   IIIT Dharwad Attendance Portal — Human-Centric Institutional Design System
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Animated Gradient Background ──────────────────────────────────────── */
-.gradient-bg {
-  background: linear-gradient(-45deg,
-    #0f0c29,
-    #302b63,
-    #24243e,
-    #1a1a2e,
-    #16213e,
-    #0f3460,
-    #533483,
-    #2b1055
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+:root {
+  --font-main: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-page: #f8fafc;
+  --card-bg: #ffffff;
+  --primary: #1e40af;
+  --primary-hover: #1e3a8a;
+  --accent: #2563eb;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --border: #e2e8f0;
+  --border-focus: #3b82f6;
+  --shadow-card: 0 20px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  --shadow-input: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+
+/* ── Base Styles ───────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  25%  { background-position: 50% 100%; }
-  50%  { background-position: 100% 50%; }
-  75%  { background-position: 50% 0%; }
-  100% { background-position: 0% 50%; }
+/* Subtle background accent grid for authentic portal texture */
+.portal-bg {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(30, 64, 175, 0.05) 0px, transparent 50%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
 }
 
-/* ── Floating Orbs (background decoration) ─────────────────────────────── */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
+/* ── Institutional Header & Navbar ─────────────────────────────────────── */
+.portal-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.orb-1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #7c3aed, transparent 70%);
-  top: -10%;
-  left: -10%;
-  animation: float1 18s ease-in-out infinite;
+/* ── Card Styling ──────────────────────────────────────────────────────── */
+.human-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #2563eb, transparent 70%);
-  bottom: -10%;
-  right: -10%;
-  animation: float2 22s ease-in-out infinite;
+/* ── Form Inputs ───────────────────────────────────────────────────────── */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
 }
 
-.orb-3 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, #06b6d4, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float3 25s ease-in-out infinite;
+.human-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.9375rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: var(--shadow-input);
+  transition: all 0.2s ease;
 }
 
-@keyframes float1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(60px, 40px) scale(1.1); }
-  50%      { transform: translate(30px, 80px) scale(0.95); }
-  75%      { transform: translate(-40px, 30px) scale(1.05); }
+.human-input::placeholder {
+  color: #94a3b8;
 }
 
-@keyframes float2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(-50px, -30px) scale(1.08); }
-  50%      { transform: translate(-30px, -70px) scale(0.92); }
-  75%      { transform: translate(40px, -40px) scale(1.04); }
-}
-
-@keyframes float3 {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  33%      { transform: translate(-40%, -60%) scale(1.15); }
-  66%      { transform: translate(-60%, -40%) scale(0.9); }
-}
-
-/* ── Glassmorphism Card ────────────────────────────────────────────────── */
-.glass-card {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Glass Input ───────────────────────────────────────────────────────── */
-.glass-input {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  color: #fff;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.glass-input:focus {
+.human-input:focus {
   outline: none;
-  border-color: rgba(139, 92, 246, 0.6);
-  box-shadow:
-    0 0 0 3px rgba(139, 92, 246, 0.15),
-    0 0 20px rgba(139, 92, 246, 0.1);
-  background: rgba(255, 255, 255, 0.1);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  background-color: #ffffff;
 }
 
-.glass-input.input-error {
-  border-color: rgba(239, 68, 68, 0.6);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+.human-input.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
 }
 
-.glass-input.input-success {
-  border-color: rgba(34, 197, 94, 0.6);
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+.human-input.input-success {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
 }
 
-/* ── Role Toggle ───────────────────────────────────────────────────────── */
-.role-toggle-wrapper {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+/* ── Role Selector Pill ────────────────────────────────────────────────── */
+.role-tabs {
+  display: flex;
+  background: #f1f5f9;
   padding: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
 }
 
 .role-btn {
-  padding: 10px 0;
-  border-radius: 12px;
+  flex: 1;
+  padding: 10px;
   font-size: 0.875rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  font-weight: 600;
+  color: #64748b;
   border: none;
   background: transparent;
-  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .role-btn:hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: #1e293b;
 }
 
 .role-btn.active {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  background: #ffffff;
+  color: #1e40af;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
 }
 
-/* ── Primary Button ────────────────────────────────────────────────────── */
-.btn-primary {
-  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.btn-submit {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1e40af, #2563eb);
   border: none;
-  border-radius: 14px;
-  color: #fff;
-  font-weight: 600;
-  padding: 14px 0;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #6d28d9, #2563eb);
-  opacity: 0;
-  transition: opacity 0.3s;
+.btn-submit:hover {
+  background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
 }
 
-.btn-primary:hover::before {
-  opacity: 1;
+.btn-submit:active {
+  transform: translateY(0);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
-}
-
-.btn-primary:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
+.btn-submit:disabled {
+  opacity: 0.65;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-.btn-primary span {
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Google Button ─────────────────────────────────────────────────────── */
-.btn-google {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  color: #fff;
-  font-weight: 500;
-  padding: 14px 0;
+/* ── Password Visibility Toggle ────────────────────────────────────────── */
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6px;
+  border-radius: 8px;
+  transition: color 0.2s;
 }
 
-.btn-google:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+.toggle-password:hover {
+  color: #0f172a;
 }
 
-.btn-google:active {
-  transform: translateY(0) scale(0.98);
-}
-
-/* ── Password Strength Meter ───────────────────────────────────────────── */
+/* ── Password Strength Checklist ───────────────────────────────────────── */
 .strength-bar-track {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.08);
+  height: 5px;
+  background: #e2e8f0;
   border-radius: 999px;
   overflow: hidden;
 }
@@ -246,116 +206,94 @@
 .strength-bar-fill {
   height: 100%;
   border-radius: 999px;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.4s ease;
+  transition: width 0.3s ease, background-color 0.3s ease;
   width: 0%;
 }
 
 .strength-weak     { background: #ef4444; width: 25% !important; }
 .strength-fair     { background: #f97316; width: 50% !important; }
 .strength-good     { background: #eab308; width: 75% !important; }
-.strength-strong   { background: #22c55e; width: 100% !important; }
+.strength-strong   { background: #10b981; width: 100% !important; }
 
-/* ── Requirement Checklist ─────────────────────────────────────────────── */
 .req-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.75rem;
-  transition: all 0.3s;
+  font-size: 0.78125rem;
+  transition: all 0.2s;
 }
 
 .req-item .req-icon {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
-  transition: all 0.3s;
+  font-size: 0.65rem;
+  font-weight: 700;
   flex-shrink: 0;
 }
 
 .req-item.met .req-icon {
-  background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
+  background: #dcfce7;
+  color: #15803d;
 }
 
 .req-item.unmet .req-icon {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.3);
+  background: #f1f5f9;
+  color: #94a3b8;
 }
 
 .req-item.met .req-text {
-  color: rgba(34, 197, 94, 0.8);
+  color: #166534;
+  font-weight: 500;
 }
 
 .req-item.unmet .req-text {
-  color: rgba(255, 255, 255, 0.35);
+  color: #64748b;
 }
 
-/* ── Toast Notification ────────────────────────────────────────────────── */
+/* ── Toast Messages ────────────────────────────────────────────────────── */
 .toast {
   position: fixed;
-  top: 24px;
-  right: 24px;
+  top: 20px;
+  right: 20px;
   z-index: 9999;
-  padding: 16px 24px;
-  border-radius: 14px;
+  padding: 14px 20px;
+  border-radius: 12px;
   font-size: 0.875rem;
-  font-weight: 500;
-  max-width: 400px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transform: translateX(120%);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  max-width: 380px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  transform: translateY(-120%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toast.show {
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .toast-error {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #fca5a5;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
 }
 
 .toast-success {
-  background: rgba(34, 197, 94, 0.15);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  color: #86efac;
-}
-
-.toast-info {
-  background: rgba(59, 130, 246, 0.15);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #93c5fd;
-}
-
-/* ── Divider ───────────────────────────────────────────────────────────── */
-.auth-divider {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.auth-divider .line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
 }
 
 /* ── Loading Spinner ───────────────────────────────────────────────────── */
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.6s linear infinite;
   display: inline-block;
 }
 
@@ -363,62 +301,25 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Page Transition ───────────────────────────────────────────────────── */
-.page-enter {
-  animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* ── Scrollbar ─────────────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+/* ── Utility Badges & Links ────────────────────────────────────────────── */
+.badge-domain {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 4px 10px;
   border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* ── Misc Utilities ────────────────────────────────────────────────────── */
-.text-gradient {
-  background: linear-gradient(135deg, #c084fc, #60a5fa, #34d399);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.link-glow:hover {
-  text-shadow: 0 0 12px rgba(196, 132, 252, 0.5);
-}
-
-/* Password visibility toggle */
-.toggle-password {
-  color: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
+.link-primary {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
   transition: color 0.2s;
-  background: none;
-  border: none;
-  padding: 4px;
 }
 
-.toggle-password:hover {
-  color: rgba(255, 255, 255, 0.7);
+.link-primary:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }

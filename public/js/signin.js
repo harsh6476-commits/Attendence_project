@@ -11,7 +11,6 @@ const emailInput = document.getElementById('email');
 const passInput  = document.getElementById('password');
 const submitBtn  = document.getElementById('submitBtn');
 const submitText = document.getElementById('submitText');
-const googleBtn  = document.getElementById('googleBtn');
 const emailError = document.getElementById('emailError');
 
 // ── Role Toggle ───────────────────────────────────────────────────────────
@@ -132,19 +131,6 @@ form.addEventListener('submit', async (e) => {
     submitText.textContent = 'Sign In';
   }
 });
-
-// ── Google Sign In ────────────────────────────────────────────────────────
-googleBtn.addEventListener('click', () => {
-  window.location.href = `/api/auth/google?role=${selectedRole}`;
-});
-
-// ── Handle Google auth error in URL ───────────────────────────────────────
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('error') === 'google_auth_failed') {
-  showToast('Google authentication failed. Make sure you use an @iiitdwd.ac.in email.');
-  // Clean the URL
-  window.history.replaceState({}, document.title, '/signin.html');
-}
 
 // ── Auto-redirect if already logged in ────────────────────────────────────
 if (localStorage.getItem('token')) {

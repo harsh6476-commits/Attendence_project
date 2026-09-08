@@ -3,139 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome — IIIT Dharwad Attendance Portal</title>
+  <title>Dashboard — IIIT Dharwad Attendance Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;600;700&family=Noto+Sans+Kannada:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .welcome-container {
-      text-align: center;
-      animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .welcome-icon {
-      width: 80px;
-      height: 80px;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 32px;
-    }
-
-    .welcome-icon svg {
-      width: 40px;
-      height: 40px;
-      color: #fff;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 8px;
-    }
-
-    .username-display {
-      font-size: 1.25rem;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 24px;
-    }
-
-    .role-badge {
-      display: inline-block;
-      padding: 6px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 48px;
-    }
-
-    .logout-btn {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.6);
-      padding: 12px 32px;
-      border-radius: 12px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .logout-btn:hover {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
-    }
-
-    .loading-state {
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 0.875rem;
-    }
-
-    .loading-state .dot {
-      animation: blink 1.4s infinite;
-    }
-    .loading-state .dot:nth-child(2) { animation-delay: 0.2s; }
-    .loading-state .dot:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes blink {
-      0%, 20% { opacity: 0; }
-      50%     { opacity: 1; }
-      100%    { opacity: 0; }
-    }
+    .font-kannada { font-family: 'Noto Sans Kannada', sans-serif; }
+    .font-hindi { font-family: 'Noto Sans Devanagari', sans-serif; }
   </style>
 </head>
-<body>
+<body class="portal-bg min-h-screen flex flex-col">
 
-  <!-- Loading State -->
-  <div id="loadingState" class="welcome-container">
-    <p class="loading-state">
-      Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-    </p>
+  <!-- ── Loading State ─────────────────────────────────────────────────── -->
+  <div id="loadingState" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+    <div class="spinner border-blue-600 mb-3" style="width: 32px; height: 32px; border-width: 3px; border-top-color: #1e40af;"></div>
+    <p class="text-sm font-semibold text-slate-600">Loading your IIIT Dharwad portal session...</p>
   </div>
 
-  <!-- Welcome Content (hidden until loaded) -->
-  <div id="welcomeContent" class="welcome-container" style="display: none;">
-    <div class="welcome-icon">
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-      </svg>
-    </div>
-    <h1>Welcome,</h1>
-    <p class="username-display" id="usernameDisplay"></p>
-    <div class="role-badge" id="roleBadge"></div>
-    <br />
-    <button class="logout-btn" onclick="logout()">Logout</button>
+  <!-- ── Main Dashboard Content (Hidden until verified) ────────────────── -->
+  <div id="welcomeContent" style="display: none;" class="flex-1 flex flex-col">
+    
+    <!-- Top Navigation Bar with Official Institutional Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+        
+        <!-- Left: Official Logo & Name -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 sm:w-12 h-10 sm:h-12 flex-shrink-0">
+            <img src="/images/logo.svg" alt="IIIT Dharwad Logo" class="w-full h-full object-contain" />
+          </div>
+          <div>
+            <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">IIIT Dharwad</h1>
+            <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Indian Institute of Information Technology Dharwad</p>
+          </div>
+        </div>
+
+        <!-- Right: Profile Info & Logout -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="text-right hidden sm:block">
+            <p id="usernameDisplay" class="text-sm font-bold text-slate-900 leading-tight"></p>
+            <span id="roleBadge" class="inline-block text-xs font-semibold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100 mt-0.5"></span>
+          </div>
+          <button onclick="logout()" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all">
+            <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+      
+      <!-- Institutional Welcome Banner with Official Trilingual Branding -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-slate-900 max-w-3xl">
+          <p class="font-kannada text-xs sm:text-sm font-semibold text-slate-700">
+            ಭಾರತೀಯ ಮಾಹಿತಿ ತಂತ್ರಜ್ಞಾನ ಸಂಸ್ಥೆ ಧಾರವಾಡ
+          </p>
+          <p class="font-hindi text-xs sm:text-sm font-semibold text-slate-700">
+            भारतीय सूचना प्रौद्योगिकी संस्थान धारवाड़
+          </p>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-blue-950 tracking-tight">
+            Indian Institute of Information Technology Dharwad
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium">
+            [Institute of National Importance by An Act of Parliament]
+          </p>
+          <div class="pt-2 flex flex-wrap gap-2">
+            <span class="bg-blue-50 text-blue-900 text-xs font-semibold px-3 py-1 rounded-full border border-blue-100">
+              Academic Session 2025–2026
+            </span>
+            <span class="bg-emerald-50 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-100">
+              Official Attendance Portal
+            </span>
+          </div>
+        </div>
+
+        <div class="w-24 sm:w-32 h-24 sm:h-32 flex-shrink-0 opacity-90 hidden md:block">
+          <img src="/images/logo.svg" alt="IIIT Dharwad Crest" class="w-full h-full object-contain" />
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Metric 1: Overall Attendance -->
+        <div class="human-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Overall Attendance</span>
+            <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm font-bold">✓</span>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-slate-900">89.2%</div>
+            <div class="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
+              <div class="bg-emerald-500 h-full rounded-full" style="width: 89.2%;"></div>
+            </div>
+            <p class="text-xs text-emerald-600 font-semibold mt-2">Above 75% Criteria (Safe)</p>
+          </div>
+        </div>
+
+        <!-- Metric 2: Total Classes -->
+        <div class="human-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Classes Attended</span>
+            <span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">📚</span>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-slate-900">148 / 166</div>
+            <p class="text-xs text-slate-500 mt-2 font-medium">18 total absences logged</p>
+          </div>
+        </div>
+
+        <!-- Metric 3: Department -->
+        <div class="human-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Department</span>
+            <span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">🏛️</span>
+          </div>
+          <div>
+            <div class="text-xl font-bold text-slate-900">Computer Science</div>
+            <p class="text-xs text-slate-500 mt-1 font-medium">IIIT Dharwad Main Campus</p>
+          </div>
+        </div>
+
+        <!-- Metric 4: Status -->
+        <div class="human-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Account Status</span>
+            <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">🛡️</span>
+          </div>
+          <div>
+            <div class="text-xl font-bold text-emerald-700">Verified Active</div>
+            <p class="text-xs text-slate-500 mt-1 font-medium">Official @iiitdwd.ac.in ID</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Course Attendance Table -->
+      <div class="human-card overflow-hidden">
+        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Course-wise Attendance Breakdown</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Current Semester 2026</p>
+          </div>
+          <span class="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-lg">
+            5 Enrolled Courses
+          </span>
+        </div>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-600">
+            <thead class="bg-slate-50 text-xs text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-100">
+              <tr>
+                <th class="px-6 py-3.5">Course Code & Title</th>
+                <th class="px-6 py-3.5">Faculty</th>
+                <th class="px-6 py-3.5">Attended / Held</th>
+                <th class="px-6 py-3.5">Percentage</th>
+                <th class="px-6 py-3.5">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-medium">
+              <tr class="hover:bg-slate-50/60 transition-colors">
+                <td class="px-6 py-4 font-semibold text-slate-900">CS201 — Data Structures & Algorithms</td>
+                <td class="px-6 py-4 text-slate-600">Dr. K. S. Murthy</td>
+                <td class="px-6 py-4">36 / 40</td>
+                <td class="px-6 py-4 font-bold text-emerald-600">90.0%</td>
+                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-full font-semibold border border-emerald-100">Excellent</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition-colors">
+                <td class="px-6 py-4 font-semibold text-slate-900">CS202 — Database Management Systems</td>
+                <td class="px-6 py-4 text-slate-600">Prof. Ananya Rao</td>
+                <td class="px-6 py-4">32 / 36</td>
+                <td class="px-6 py-4 font-bold text-emerald-600">88.8%</td>
+                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-full font-semibold border border-emerald-100">Good</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition-colors">
+                <td class="px-6 py-4 font-semibold text-slate-900">CS203 — Web Software Engineering</td>
+                <td class="px-6 py-4 text-slate-600">Dr. Rajesh Kumar</td>
+                <td class="px-6 py-4">28 / 30</td>
+                <td class="px-6 py-4 font-bold text-emerald-600">93.3%</td>
+                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-full font-semibold border border-emerald-100">Excellent</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition-colors">
+                <td class="px-6 py-4 font-semibold text-slate-900">CS204 — Computer Networks</td>
+                <td class="px-6 py-4 text-slate-600">Prof. S. N. Hegde</td>
+                <td class="px-6 py-4">27 / 32</td>
+                <td class="px-6 py-4 font-bold text-blue-600">84.3%</td>
+                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-blue-50 text-blue-700 text-xs rounded-full font-semibold border border-blue-100">Good</span></td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition-colors">
+                <td class="px-6 py-4 font-semibold text-slate-900">MA201 — Discrete Mathematics</td>
+                <td class="px-6 py-4 text-slate-600">Dr. V. K. Joshi</td>
+                <td class="px-6 py-4">25 / 28</td>
+                <td class="px-6 py-4 font-bold text-emerald-600">89.2%</td>
+                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-xs rounded-full font-semibold border border-emerald-100">Good</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 font-medium mt-8">
+      Indian Institute of Information Technology Dharwad &bull; Official Academic Portal
+    </footer>
+
   </div>
 
   <script src="/js/welcome.js"></script>
